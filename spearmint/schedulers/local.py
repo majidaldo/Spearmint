@@ -187,6 +187,7 @@ from abstract_scheduler import AbstractScheduler
 import os
 import subprocess
 import sys
+import psutil
 
 def init(*args, **kwargs):
     return LocalScheduler(*args, **kwargs)
@@ -228,12 +229,7 @@ class LocalScheduler(AbstractScheduler):
         
 
     def alive(self, process_id):
-        try:
-            # Send an alive signal to proc (note this could kill it in windows)
-            os.kill(process_id, 0)
-        except OSError:
-            # Job is no longer running.
-            return False
-        else:
-            return True
+        # todo: not correct to check pid b/c it could be taken by
+        # another program .
+        return psutil.pid_exists(process_id)
 
