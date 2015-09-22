@@ -182,6 +182,7 @@
 # to enter into this License and Terms of Use on behalf of itself and
 # its Institution.
 
+
 import sys
 import optparse
 import importlib
@@ -273,6 +274,7 @@ def main():
             # Note: I chose to fill up one resource and them move on to the next
             # You could also do it the other way, by changing "while" to "if" here
 
+            remove_broken_jobs(db, jobs, experiment_name, resources)
             while resource.acceptingJobs(jobs):
 
                 # Load jobs from DB 
